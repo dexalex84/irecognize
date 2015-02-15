@@ -1,0 +1,13 @@
+<h1>Listing Workitems</h1>
+
+
+    <% @workitems.each do |workitem| %>
+      <tr>
+        <td><%= link_to 'Show', workitem %></td>
+        <td><%= link_to 'Edit', edit_workitem_path(workitem) %></td>
+        <td><%= link_to 'Destroy', workitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+
+<%= link_to 'New Workitem', new_workitem_path %>

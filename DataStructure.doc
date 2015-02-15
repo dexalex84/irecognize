@@ -1,0 +1,13 @@
+1.
+	User
+
+	has_many :
+	Devise
+
+2   Workitem
+	name			:string
+	description	 	:string
+
+	belongs_to :user
+
+3   
