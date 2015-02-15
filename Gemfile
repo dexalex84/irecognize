@@ -45,6 +45,8 @@ group :development, :test do
 
 end
 
+gem 'devise', '~> 3.4.1'
+
 group :development do
   gem 'annotate' 
   gem "better_errors"
