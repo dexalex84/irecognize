@@ -1,13 +1,18 @@
-<h1>Listing Workitems</h1>
+<div class = "container" >
+  <h1>Listing Workitems</h1>
+
+  <% @workitems.each do |workitem| %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%=workitem.name%></div>
+      <div class="panel-body">
+          
+          <p><%workitem.description%></p>
+          <p><%= link_to 'Show', workitem %></p>
+          <p><%= link_to 'Edit', edit_workitem_path(workitem) %></p>
+          <p><%= link_to 'Destroy', workitem, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </div>
+    </div>
+  <% end %>
+</div>   
 
 
-    <% @workitems.each do |workitem| %>
-      <tr>
-        <td><%= link_to 'Show', workitem %></td>
-        <td><%= link_to 'Edit', edit_workitem_path(workitem) %></td>
-        <td><%= link_to 'Destroy', workitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-
-
-<%= link_to 'New Workitem', new_workitem_path %>

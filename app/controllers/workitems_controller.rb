@@ -10,21 +10,25 @@ class WorkitemsController < ApplicationController
   # GET /workitems/1
   # GET /workitems/1.json
   def show
+    @workitem = Workitem.find(params[:id])
   end
 
   # GET /workitems/new
   def new
-    @workitem = Workitem.new
+    @workitem = current_user.workitems.build
   end
 
   # GET /workitems/1/edit
   def edit
+    @workitem = Workitem.find(params[:id])
+    @workitem.name        = params[:name]
+    @workitem.description = params[:description]
   end
 
   # POST /workitems
   # POST /workitems.json
   def create
-    @workitem = Workitem.new(workitem_params)
+    @workitem = current_user.workitems.build(workitem_params)
 
     respond_to do |format|
       if @workitem.save
@@ -69,6 +73,6 @@ class WorkitemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workitem_params
-      params[:workitem]
+      params.require(:workitem).permit(:name, :description, :user_id)
     end
 end
