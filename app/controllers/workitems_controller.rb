@@ -10,7 +10,6 @@ class WorkitemsController < ApplicationController
   # GET /workitems/1
   # GET /workitems/1.json
   def show
-    @workitem = Workitem.find(params[:id])
   end
 
   # GET /workitems/new
@@ -20,9 +19,6 @@ class WorkitemsController < ApplicationController
 
   # GET /workitems/1/edit
   def edit
-    @workitem = Workitem.find(params[:id])
-    @workitem.name        = params[:name]
-    @workitem.description = params[:description]
   end
 
   # POST /workitems

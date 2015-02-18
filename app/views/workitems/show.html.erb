@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-
-<%@workitem.name%>
-<%= link_to 'Edit', edit_workitem_path(@workitem) %> |
-<%= link_to 'Back', workitems_path %>
+<div class = "container" >
+	<h1>Workitem</h1>
+    <p>Name<br/>
+    <p><%@workitem.name%></p>
+    <p>Description<br/>
+    <p><%@workitem.description%><br/>
+	<%= link_to 'Edit', edit_workitem_path(@workitem) %> |
+	<%= link_to 'Back', workitems_path %>
+</div>

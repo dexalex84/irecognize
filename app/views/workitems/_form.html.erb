@@ -1,5 +1,4 @@
-
-  <%= form_for(@workitem) do |f| %>
+<%= form_for(@workitem) do |f| %>
     <% if @workitem.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@workitem.errors.count, "error") %> prohibited this workitem from being saved:</h2>
@@ -12,12 +11,18 @@
       </div>
     <% end %>
 
-    <%= f.label "Name"%><br/>
-    <%= f.text_field :name, size: 100 %><br/>
-    <%= f.label "Description"%><br/>
-    <%= f.text_area :description, cols: 90, rows: 10  %><br/>
+    <div class = "form_group">
+      <%= f.label "Name"%><br/>
+      <%= f.text_field :name, class: "form-control" %><br/>
+    </div>
 
+    <div class = "form_group">
+    <%= f.label "Description"%><br/>
+    <%= f.text_area :description, class: "form-control"  %><br/>
+    </div>
+    
     <div class="actions">
       <%= f.submit %>
     </div>
-  <% end %>
+<% end %>
+
