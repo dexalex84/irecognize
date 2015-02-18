@@ -1,6 +1,6 @@
 class WorkitemsController < ApplicationController
   before_action :set_workitem, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_current_user, only: [:edit, :update, :destroy]
   # GET /workitems
   # GET /workitems.json
   def index
@@ -65,6 +65,11 @@ class WorkitemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_workitem
       @workitem = Workitem.find(params[:id])
+    end
+
+    def check_current_user
+        @workitem = current_user.workitems.find_by(id: params[:id])
+        redirect_to workitems_path, notice: "Have no right to that item" if @workitem.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
