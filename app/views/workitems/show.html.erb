@@ -1,6 +1,14 @@
 	<h1>Workitem</h1>
     <div class="panel panel-default">
-    	<div class="panel-heading"><p><%=@workitem.name%></p></div>
+    	
+    	<div class="panel-heading">
+    		<%=@workitem.name%>
+	      <%if !@workitem.status.nil? && @workitem.status.name == "Published"   %>
+	        <span class="wi_stat label label-primary"><%=@workitem.status.name unless @workitem.status.nil? %></span>
+	      <%else%>
+	        <span class="wi_stat label label-default"><%=@workitem.status.name unless @workitem.status.nil? %></span>
+	      <%end%>	
+    	</div>
     	<div class="panel-body">
     	<p><%=@workitem.description%><br/><br/>
 		<%= link_to 'Edit', edit_workitem_path(@workitem) %> |

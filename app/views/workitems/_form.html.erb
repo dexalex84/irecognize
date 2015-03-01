@@ -12,7 +12,11 @@
     <% end %>
 
     <div class = "form_group">
-      <span class="label label-default"><%=@workitem.status.name unless @workitem.status.nil? %></span>
+      <%if !@workitem.status.nil? && @workitem.status.name == "Published"   %>
+        <span class="label label-primary"><%=@workitem.status.name unless @workitem.status.nil? %></span>
+      <%else%>
+        <span class="label label-default"><%=@workitem.status.name unless @workitem.status.nil? %></span>
+      <%end%>
     </div>
     <br>
     <div class = "form_group">
