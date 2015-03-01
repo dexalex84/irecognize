@@ -1,6 +1,6 @@
 class WorkitemsController < ApplicationController
-  before_action :set_workitem, only: [:show, :edit, :update, :destroy]
-  before_action :check_current_user, only: [:edit, :update, :destroy]
+  before_action :set_workitem, only: [:show, :edit, :update, :destroy] #:publish]
+  before_action :check_current_user, only: [:edit, :update, :destroy] #:publish]
   # GET /workitems
   # GET /workitems.json
   def index
@@ -15,6 +15,10 @@ class WorkitemsController < ApplicationController
   # GET /workitems/new
   def new
     @workitem = current_user.workitems.build
+
+
+
+    
   end
 
   # GET /workitems/1/edit
@@ -25,9 +29,16 @@ class WorkitemsController < ApplicationController
   # POST /workitems.json
   def create
     @workitem = current_user.workitems.build(workitem_params)
+    
+    if to_publish? 
+      @workitem.status = get_published_stat 
+    else
+      @workitem.status = get_new_stat
+    end
 
     respond_to do |format|
       if @workitem.save
+
         format.html { redirect_to @workitem, notice: 'Workitem was successfully created.' }
         format.json { render :show, status: :created, location: @workitem }
       else
@@ -40,6 +51,10 @@ class WorkitemsController < ApplicationController
   # PATCH/PUT /workitems/1
   # PATCH/PUT /workitems/1.json
   def update
+    
+    @workitem.status = get_published_stat if to_publish?
+    @workitem.status = get_new_stat  if to_unpublish?
+
     respond_to do |format|
       if @workitem.update(workitem_params)
         format.html { redirect_to @workitem, notice: 'Workitem was successfully updated.' }
@@ -61,6 +76,20 @@ class WorkitemsController < ApplicationController
     end
   end
 
+#
+#  def publish
+#    published = Status.find_by(statusable_type: 'Workitem', name: 'Published')
+#    @workitem.update(status: published) unless published.nil?
+#  end
+
+    def to_publish?
+      params[:commit]=="Publish" 
+    end
+
+    def to_unpublish?
+      params[:commit]=="Unpublish"
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workitem
@@ -74,6 +103,14 @@ class WorkitemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workitem_params
-      params.require(:workitem).permit(:name, :description, :user_id)
+      params.require(:workitem).permit(:name, :description, :user_id, :status)
+    end
+
+    def get_published_stat
+        Status.find_by(statusable_type: 'Workitem', name: 'Published')
+    end
+
+    def get_new_stat
+        Status.find_by(statusable_type: 'Workitem', name: 'New')
     end
 end

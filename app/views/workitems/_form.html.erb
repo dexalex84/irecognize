@@ -12,17 +12,27 @@
     <% end %>
 
     <div class = "form_group">
+      <span class="label label-default"><%=@workitem.status.name unless @workitem.status.nil? %></span>
+    </div>
+    <br>
+    <div class = "form_group">
       <%= f.label "Name"%><br/>
       <%= f.text_field :name, class: "form-control" %><br/>
     </div>
 
     <div class = "form_group">
-    <%= f.label "Description"%><br/>
-    <%= f.text_area :description, class: "form-control"  %><br/>
+      <%= f.label "Description"%><br/>
+      <%= f.text_area :description, class: "form-control"  %><br/>
     </div>
-    
+  
     <div class="actions">
-      <%= f.submit %>
+      <%if !@workitem.status.nil? && @workitem.status.name == "Published"   %>
+        <%= f.button "Unpublish", name: :commit, value: "Unpublish", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Unpublish"} %>
+        <%= f.button "Update", name: :commit, value: "Update" , class: "btn btn-default", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Update"} %>    
+      <%else%>
+        <%= f.button "Publish", name: :commit, value: "Publish", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Publish"} %>
+        <%= f.button "Save as a draft", name: :commit, value: "Save as a draft", class: "btn btn-default", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Save as a draft"}  %>
+      <%end%>
     </div>
 <% end %>
 

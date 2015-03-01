@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :workitems
+
+  resources :workitems 
 
   root 'workitems#index'
-  
-
+  ###
+  #do
+  #  member do 
+  #    patch :publish # making for publish and unpublish method
+  #  end
+  #end
+  ###
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
