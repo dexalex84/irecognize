@@ -17,14 +17,24 @@
 3   WorkitemOffer	-- Предложение от пользователя по выполнению задания
 	user_id         -- Автор
 	workitem_id
-	status_id		as :statusable
+	status_id		as :statusable 
+
 
 	has_one 		:status
 
 4   Status
+
 	statusable_type	:string
 	name			:string
 	
-	
+	belongs_to :statusable, polymorphic: true
 
 	has_many: workitems
+
+	Id 		Type 			Name 
+	1   	Workitem		New
+	2		Workitem		Posted
+	3		Workitem   		InWork
+	4		Workitem 		Done
+	5		WorkitemOffer	New
+	6		WorkitemOffer	Confirmed
