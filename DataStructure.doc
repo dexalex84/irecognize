@@ -1,13 +1,30 @@
 1.
 	User
 
-	has_many :
+	has_many : workitems
+
 	Devise
 
-2   Workitem
+2   Workitem        -- Задание
 	name			:string
 	description	 	:string
+	status_id       :integer
+
 
 	belongs_to :user
+	has_one			:status
 
-3   
+3   WorkitemOffer	-- Предложение от пользователя по выполнению задания
+	user_id         -- Автор
+	workitem_id
+	status_id		as :statusable
+
+	has_one 		:status
+
+4   Status
+	statusable_type	:string
+	name			:string
+	
+	
+
+	has_many: workitems

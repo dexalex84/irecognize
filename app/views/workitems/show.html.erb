@@ -1,10 +1,9 @@
-<p id="notice"><%= notice %></p>
-<div class = "container" >
 	<h1>Workitem</h1>
-    <p>Name<br/>
-    <p><%=@workitem.name%></p>
-    <p>Description<br/>
-    <p><%=@workitem.description%><br/>
-	<%= link_to 'Edit', edit_workitem_path(@workitem) %> |
-	<%= link_to 'Back', workitems_path %>
-</div>
+    <div class="panel panel-default">
+    	<div class="panel-heading"><p><%=@workitem.name%></p></div>
+    	<div class="panel-body">
+    	<p><%=@workitem.description%><br/><br/>
+		<%= link_to 'Edit', edit_workitem_path(@workitem) %> |
+		<%= link_to 'Back', workitems_path %>
+		</div>
+	</div>

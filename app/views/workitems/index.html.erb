@@ -1,5 +1,7 @@
-<div class = "container" >
-  <h1>Listing Workitems</h1>
+  
+
+
+  <h1>Workitems</h1>
 
   <% @workitems.each do |workitem| %>
     <div class="panel panel-default">
@@ -9,7 +11,7 @@
           <p><%=workitem.description%></p>
           <p><%= link_to 'Show', workitem %>
 
-            <% if workitem.user == current_user  %>
+            <% if workitem.user == current_user && user_signed_in? %>
               <%= link_to 'Edit', edit_workitem_path(workitem) %>
               <%= link_to 'Destroy', workitem, method: :delete, data: { confirm: 'Are you sure?' } %>
               
@@ -19,7 +21,7 @@
       </div>
     </div>
   <% end %>
-</div>   
+
 
 
          
