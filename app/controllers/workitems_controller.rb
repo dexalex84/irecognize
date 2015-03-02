@@ -4,7 +4,7 @@ class WorkitemsController < ApplicationController
   # GET /workitems
   # GET /workitems.json
   def index
-    @workitems = Workitem.all
+    @workitems = Workitem.all.order(updated_at: :desc)
   end
 
   # GET /workitems/1
