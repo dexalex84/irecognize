@@ -31,9 +31,9 @@ class WorkitemsController < ApplicationController
     @workitem = current_user.workitems.build(workitem_params)
     
     if to_publish? 
-      @workitem.status = get_published_stat 
+      @workitem.status = Status.wi_published.first #get_published_stat 
     else
-      @workitem.status = get_new_stat
+      @workitem.status = Status.wi_new.first #get_new_stat
     end
 
     respond_to do |format|
@@ -52,8 +52,8 @@ class WorkitemsController < ApplicationController
   # PATCH/PUT /workitems/1.json
   def update
     
-    @workitem.status = get_published_stat if to_publish?
-    @workitem.status = get_new_stat  if to_unpublish?
+    @workitem.status = Status.wi_published.first  if to_publish? #get_published_stat
+    @workitem.status = Status.wi_new.first  if to_unpublish? #get_new_stat
 
     respond_to do |format|
       if @workitem.update(workitem_params)
@@ -106,11 +106,4 @@ class WorkitemsController < ApplicationController
       params.require(:workitem).permit(:name, :description, :user_id, :status)
     end
 
-    def get_published_stat
-        Status.find_by(statusable_type: 'Workitem', name: 'Published')
-    end
-
-    def get_new_stat
-        Status.find_by(statusable_type: 'Workitem', name: 'New')
-    end
 end

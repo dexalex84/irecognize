@@ -26,10 +26,22 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
+  </br>
 
+  <div>
+    <%= radio_button_tag(:user_type, "Performer") %>
+    <%= label_tag(:performer, "I can recognize") %>
+    <%= radio_button_tag(:user_type, "Customer") %>
+    <%= label_tag(:customer, "I need to recognize") %>
+  </div>
+  </br>
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
+
+
+  
+
 <% end %>
 
 <h3>Cancel my account</h3>

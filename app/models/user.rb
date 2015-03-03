@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :workitems
+
+  enum user_type: { customer: 0, performer: 1 }
+
 end
