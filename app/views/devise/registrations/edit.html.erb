@@ -29,11 +29,12 @@
   </br>
 
   <div>
-    <%= radio_button_tag(:user_type, "Performer") %>
-    <%= label_tag(:performer, "I can recognize") %>
-    <%= radio_button_tag(:user_type, "Customer") %>
-    <%= label_tag(:customer, "I need to recognize") %>
+    <%= f.radio_button(:user_type, :performer)  %>
+    <%= label  :performer, "I can recognize" %>
+    <%= f.radio_button(:user_type, :customer)  %>
+    <%= label  :customer, "I need to recognize" %>
   </div>
+
   </br>
   <div class="actions">
     <%= f.submit "Update" %>

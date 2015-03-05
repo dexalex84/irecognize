@@ -20,6 +20,13 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+  
+  <div>
+    <%= f.radio_button(:user_type, :performer)  %>
+    <%= label  :performer, "I can recognize" %>
+    <%= f.radio_button(:user_type, :customer)  %>
+    <%= label  :customer, "I need to recognize" %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
