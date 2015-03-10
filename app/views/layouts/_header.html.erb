@@ -3,17 +3,35 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <%= link_to "Irecognize" , root_path, class: "navbar-brand"  %> 
+    <% if user_signed_in?  %>
+      <% if current_user.is_customer? %>
+        <%= link_to "I need recognize" , root_path, class: "navbar-brand"  %> 
+      <%else%>
+        <%= link_to "I can recognize" , root_path, class: "navbar-brand"  %> 
+      <%end%>
+    <%else%>
+        <%= link_to "Irecognize" , root_path, class: "navbar-brand"  %> 
+    <%end%>
     </div>
 
       
       <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-          <%= link_to 'New workitem', new_workitem_path , class: "navbar-brand"%>
-          <%= link_to current_user.email , edit_user_registration_path, class: "navbar-brand"  %> 
-        <% else %>
-          <%= link_to 'Log in', new_user_session_path, class: "navbar-brand"  %>
-        <% end %>
+
+
+        <% if user_signed_in?  %>
+          <% if current_user.is_customer? %>
+            <li>
+              <%= link_to  new_workitem_path do %>
+              <span class="glyphicon glyphicon-plus"></span> New workitem
+              <%end%>
+            </li>
+          <% end %>
+          <li><%= link_to "Log off",  destroy_user_session_path,   method: :delete %>   </li> 
+          <li><%= link_to "Account settings",  edit_user_registration_path%>   </li> 
+        <%else%>
+          <li><%= link_to "Log on",  new_user_session_path   %>    </li>
+        <%end%>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

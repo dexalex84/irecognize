@@ -1,10 +1,18 @@
+
 class WorkitemsController < ApplicationController
+
   before_action :set_workitem, only: [:show, :edit, :update, :destroy] #:publish]
   before_action :check_current_user, only: [:edit, :update, :destroy] #:publish]
   # GET /workitems
   # GET /workitems.json
+  
   def index
-    @workitems = Workitem.all.order(updated_at: :desc)
+    #if @current_user_type == :performer
+      #@workitems = Workitem.all.order(updated_at: :desc)
+      #@workitems = Workitem.find_by(id: Status.where(name: "Published").map {|x| x.statusable_id} )
+      @workitems = Workitem.find_by(id:21)
+    #else
+    #  @workitems = Workitem.all.order(updated_at: :desc)
   end
 
   # GET /workitems/1
@@ -30,14 +38,11 @@ class WorkitemsController < ApplicationController
   def create
     @workitem = current_user.workitems.build(workitem_params)
     
-    if to_publish? 
-      @workitem.status = Status.wi_published.first #get_published_stat 
-    else
-      @workitem.status = Status.wi_new.first #get_new_stat
-    end
-
     respond_to do |format|
       if @workitem.save
+
+        Status.create(statusable: @workitem, name: "Published") if to_publish? 
+        Status.create(statusable: @workitem, name: "New") if !to_publish? 
 
         format.html { redirect_to @workitem, notice: 'Workitem was successfully created.' }
         format.json { render :show, status: :created, location: @workitem }
@@ -52,11 +57,13 @@ class WorkitemsController < ApplicationController
   # PATCH/PUT /workitems/1.json
   def update
     
-    @workitem.status = Status.wi_published.first  if to_publish? #get_published_stat
-    @workitem.status = Status.wi_new.first  if to_unpublish? #get_new_stat
-
     respond_to do |format|
       if @workitem.update(workitem_params)
+        st = @workitem.status
+
+        st.update(statusable: @workitem, name:"Published") if to_publish?
+        st.update(statusable: @workitem, name:"New") if to_unpublish?
+
         format.html { redirect_to @workitem, notice: 'Workitem was successfully updated.' }
         format.json { render :show, status: :ok, location: @workitem }
       else
@@ -98,6 +105,9 @@ class WorkitemsController < ApplicationController
 
     def check_current_user
         @workitem = current_user.workitems.find_by(id: params[:id])
+        
+        #@current_user_type = @workitem.user_type
+
         redirect_to workitems_path, notice: "Have no right to that item" if @workitem.nil?
     end
 

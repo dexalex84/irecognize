@@ -1,14 +1,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
+$jumbotron-bg:                                         white;
+$body-bg:                                              #ecf0f1;
 
 .container {
   padding-left: 0px;
   margin-left: 50px;
 }
 
-
 .wi_stat{
     float: right;
+}
+
+.center {
+	text-align:center;
 }

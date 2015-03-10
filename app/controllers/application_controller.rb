@@ -1,9 +1,20 @@
+#
+
 class ApplicationController < ActionController::Base
+  #require 'common/CommonHelpers.rb'
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  #before_action :init
+  
+  
+  #def init
+  #	puts "start"
+ # 	puts ::CommonHelpers.new.get_wi_published.to_s
+  #	puts "end"
+  #end
 
   protected
 

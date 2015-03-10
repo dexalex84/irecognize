@@ -1,8 +1,11 @@
   
-
-
-  <h1>Workitems</h1>
-
+  <% if  user_signed_in? %> 
+    <% if user_signed_in? && current_user.is_customer? %>
+      <h1>My workitems</h1>
+    <%else%>
+      <h1>Workitems</h1>
+    <%end%>
+  <%end%>
   <% @workitems.each do |workitem| %>
     <div class="panel panel-default">
       <div class="panel-heading"><%=workitem.name%></div>
