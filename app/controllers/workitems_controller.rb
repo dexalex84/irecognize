@@ -7,12 +7,11 @@ class WorkitemsController < ApplicationController
   # GET /workitems.json
   
   def index
-    #if @current_user_type == :performer
-      #@workitems = Workitem.all.order(updated_at: :desc)
-      #@workitems = Workitem.find_by(id: Status.where(name: "Published").map {|x| x.statusable_id} )
-      @workitems = Workitem.find_by(id:21)
-    #else
-    #  @workitems = Workitem.all.order(updated_at: :desc)
+    if current_user.is_performer?
+      @workitems = Workitem.where(id: Status.wi_published.map {|x| x.statusable_id} ).order(updated_at: :desc)
+    else
+      @workitems = Workitem.all.order(updated_at: :desc)
+    end
   end
 
   # GET /workitems/1
@@ -24,9 +23,7 @@ class WorkitemsController < ApplicationController
   def new
     @workitem = current_user.workitems.build
 
-
-
-    
+   
   end
 
   # GET /workitems/1/edit
@@ -105,8 +102,6 @@ class WorkitemsController < ApplicationController
 
     def check_current_user
         @workitem = current_user.workitems.find_by(id: params[:id])
-        
-        #@current_user_type = @workitem.user_type
 
         redirect_to workitems_path, notice: "Have no right to that item" if @workitem.nil?
     end
