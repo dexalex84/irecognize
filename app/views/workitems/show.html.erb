@@ -15,3 +15,16 @@
 		<%= link_to 'Back', workitems_path %>
 		</div>
 	</div>
+
+
+	<% WorkitemOffer.where(id:@workitem).each do |workitem| %>
+	    <div class="panel panel-default">
+	      <div class="panel-heading"><%=workitem.id%></div>
+	      <div class="panel-body">
+	          
+	          <p>asdfdf</p>
+	          <p>56565</p>
+	       
+	      </div>
+	    </div>
+  	<% end %>
