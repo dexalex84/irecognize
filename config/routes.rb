@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   devise_for :users # , controllers: { registration: "users/registrations" }
 
-  resources :workitems 
+  resources :workitems do
+    resources :offers
+  end
 
   root 'workitems#index'
   ###

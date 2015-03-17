@@ -1,6 +1,6 @@
 class WorkitemOffer < ActiveRecord::Base
 	belongs_to 	:user
-	has_one 	:workitem, inverse_of: :workitem_offer
+	belongs_to 	:workitem, inverse_of: :workitem_offers
 	has_one     :status, as:  :statusable
 
 end

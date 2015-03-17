@@ -10,21 +10,23 @@
 	      <%end%>	
     	</div>
     	<div class="panel-body">
-    	<p><%=@workitem.description%><br/><br/>
-		<%= link_to 'Edit', edit_workitem_path(@workitem) %> |
-		<%= link_to 'Back', workitems_path %>
-		</div>
+    	<p><%=@workitem.description%>
+	    	<% form_for Offer.new do |f| %>
+		    	<div class="actions">
+		        	<%= f.button "Make offer", name: :commit, value: "Make offer", class: "btn btn-primary wi_stat", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Make offer"} %>     
+		        </div> 
+	    	<%end%>
+
+		</p>
+
 	</div>
 
+    	</div>
+			<%= link_to 'Edit', edit_workitem_path(@workitem) %> |
+			<%= link_to 'Back', workitems_path %>
+		</div>
+    
+    <% render partial: "offers/offer", locals: {workitem: @workitem}%>
 
-	<% WorkitemOffer.where(id:@workitem).each do |workitem| %>
-	    <div class="panel panel-default">
-	      <div class="panel-heading"><%=workitem.id%></div>
-	      <div class="panel-body">
-	          
-	          <p>asdfdf</p>
-	          <p>56565</p>
-	       
-	      </div>
-	    </div>
-  	<% end %>
+
+

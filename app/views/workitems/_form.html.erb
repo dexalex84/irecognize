@@ -29,6 +29,15 @@
       <%= f.text_area :description, class: "form-control"  %><br/>
     </div>
   
+
+
+
+    <div class="actions">
+        <%= f.button "Make offer", name: :commit, value: "Make offer", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Make offer"} %>      
+    </div>
+    
+    <% render partial: "offers/offer", locals: {workitem: @workitem}%>
+
     <div class="actions">
       <%if !@workitem.status.nil? && @workitem.status.name == "Published"   %>
         <%= f.button "Unpublish", name: :commit, value: "Unpublish", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Unpublish"} %>
