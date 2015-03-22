@@ -1,0 +1,9 @@
+if ( $('#offerform').length===0 ) {
+	$("<%= escape_javascript render(file: 'offers/new.html.erb')%>").insertAfter('#workitem');
+	$("#new_offer_link").text("Undo offer");
+}
+else
+{
+	$('#offerform').remove();
+	$("#new_offer_link").text("Make offer");
+}

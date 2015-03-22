@@ -1,10 +1,12 @@
+<% if @workitem.offers.exists? %>
+	<h1>Active offers</h1>
+	<% workitem.offers.each do |f| %>
 
-<% workitem.offers.each do |f| %>
-
- 	<div class="panel panel-default container">
-		<div class="panel-body">
-		<p><%=f.description%></p>
+	 	<div class="panel panel-default">
+			<div class="panel-body">
+			<p><%=f.description%></p>
+			</div>
 		</div>
-	</div>
-<% end %>
+	<% end %>
 
+<% end %>
