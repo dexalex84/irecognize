@@ -11,22 +11,18 @@
     	</div>
     	<div class="panel-body">
     	<p><%=@workitem.description%>
-	    	<% form_for Offer.new do |f| %>
-		    	<div class="actions">
-		        	<%= f.button "Make offer", name: :commit, value: "Make offer", class: "btn btn-primary wi_stat", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Make offer"} %>     
-		        </div> 
-	    	<%end%>
-
+		
 		</p>
 
 	</div>
 
     	</div>
+    		<%= link_to 'Make offer', new_workitem_offer_path(@workitem) %> |
 			<%= link_to 'Edit', edit_workitem_path(@workitem) %> |
 			<%= link_to 'Back', workitems_path %>
 		</div>
-    
-    <% render partial: "offers/offer", locals: {workitem: @workitem}%>
+		
+    <%= render partial: "offers/offer", locals: {workitem: @workitem}%>
 
 
 

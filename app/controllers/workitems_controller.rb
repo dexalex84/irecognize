@@ -7,10 +7,12 @@ class WorkitemsController < ApplicationController
   # GET /workitems.json
   
   def index
-    if current_user.is_performer?
-      @workitems = Workitem.where(id: Status.wi_published.map {|x| x.statusable_id} ).order(updated_at: :desc)
-    else
-      @workitems = Workitem.all.order(updated_at: :desc)
+    if current_user.is_a? User 
+      if current_user.is_performer? 
+        @workitems = Workitem.where(id: Status.wi_published.map {|x| x.statusable_id} ).order(updated_at: :desc)
+      else
+        @workitems = Workitem.all.order(updated_at: :desc)
+      end
     end
   end
 

@@ -1,3 +1,10 @@
-<% workitem.offers.each do |workitem| %>
-	<div class="well"><%=workitem.description%></div>
+
+<% workitem.offers.each do |f| %>
+
+ 	<div class="panel panel-default container">
+		<div class="panel-body">
+		<p><%=f.description%></p>
+		</div>
+	</div>
 <% end %>
+

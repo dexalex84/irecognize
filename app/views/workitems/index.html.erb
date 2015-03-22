@@ -6,23 +6,26 @@
       <h1>Workitems</h1>
     <%end%>
   <%end%>
-  <% @workitems.each do |workitem| %>
-    <div class="panel panel-default">
-      <div class="panel-heading"><%=workitem.name%></div>
-      <div class="panel-body">
-          
-          <p><%=workitem.description%></p>
-          <p><%= link_to 'Show', workitem %>
+  
+  <% if  user_signed_in? %>
+    <% @workitems.each do |workitem| %>
+      <div class="panel panel-default">
+        <div class="panel-heading"><%=workitem.name%></div>
+        <div class="panel-body">
+            
+            <p><%=workitem.description%></p>
+            <p><%= link_to 'Show', workitem %>
 
-            <% if (workitem.user == current_user && user_signed_in? ) || current_user.is_admin?%>
-              <%= link_to 'Edit', edit_workitem_path(workitem) %>
-              <%= link_to 'Destroy', workitem, method: :delete, data: { confirm: 'Are you sure?' } %>
-              
-            <% end %>
-        </p>
-       
+              <% if (workitem.user == current_user && user_signed_in? ) || current_user.is_admin?%>
+                <%= link_to 'Edit', edit_workitem_path(workitem) %>
+                <%= link_to 'Destroy', workitem, method: :delete, data: { confirm: 'Are you sure?' } %>
+                
+              <% end %>
+          </p>
+         
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 
 
