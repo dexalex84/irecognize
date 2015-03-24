@@ -1,11 +1,29 @@
-<div id = "offerform">
-<%= form_for([@workitem, @workitem.offers.new]) do |f| %>
-    <div class = "form_group">
-      <%= f.label "Description"%><br/>
-      <%= f.text_area :description, class: "form-control"  %><br/>
-    </div>
 
-    <div class="actions">
- 		<%= f.button "Make offer", name: :commit, value: "Make offer", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Publish"} %> 	
- 	</div>
-  <%end%>
+<div id = "offerform">
+	<div class="panel panel-default">
+	  <div class="panel-body">
+	  	<h2>Make offer</h2>
+		<%= form_for([@workitem, @workitem.offers.new]) do |f| %>
+
+
+		    <div class = "form_group">
+		      <%= f.label "Description"%><br/>
+		      <%= f.text_area :description, class: "form-control"  %><br/>
+		    </div>
+		    <div class = "form_group">
+		      <%= f.label "Price"%><br/>
+		      <%= f.number_field :price, class: "form-control"  %><br/>
+		    </div>
+		    <div class = "form_group">
+		      <%= f.label "Hours to finish"%><br/>
+		      <%= f.number_field :time, class: "form-control"  %><br/>
+		    </div>
+
+
+		    <div class="actions">
+		 		<%= f.button "Make offer", name: :commit, value: "Make offer", class: "btn btn-primary", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>Publish"} %> 	
+		 	</div>
+		  <%end%>
+	    </div>
+	</div>
+</div>

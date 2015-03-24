@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
  
   has_many :workitems
-
+  has_many :offers
+  
   enum user_type: { customer:  0, performer: 1, admin: 2, guest: 0 }
 
   def is_customer?

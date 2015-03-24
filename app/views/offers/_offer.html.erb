@@ -4,7 +4,15 @@
 
 	 	<div class="panel panel-default">
 			<div class="panel-body">
-			<p><%=f.description%></p>
+				<div class="user_pic panel panel-default">
+					<div class="panel-body">
+						pic
+					</div>
+					<%=f.user.email if f.user.is_a? User %>
+					<%=f.price%>
+					<%=f.time%>
+				</div>
+
 			</div>
 		</div>
 	<% end %>

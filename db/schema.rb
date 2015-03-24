@@ -11,13 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317184816) do
+ActiveRecord::Schema.define(version: 20150324192404) do
 
   create_table "offers", force: :cascade do |t|
     t.integer  "workitem_id"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.float    "price"
+    t.float    "time"
+    t.integer  "status_id"
+    t.integer  "currency_id"
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -46,6 +51,13 @@ ActiveRecord::Schema.define(version: 20150317184816) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "workitem_offers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "workitem_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "workitems", force: :cascade do |t|
     t.datetime "created_at",  null: false
